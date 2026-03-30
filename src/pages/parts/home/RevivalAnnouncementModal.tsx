@@ -39,7 +39,7 @@ export function RevivalAnnouncementModal() {
               <Flare.Child className="pointer-events-auto relative">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-xl font-bold text-white">
-                    P-Stream is Back
+                    R-Stream
                   </h2>
                   <button
                     type="button"
@@ -51,19 +51,19 @@ export function RevivalAnnouncementModal() {
                 </div>
                 <div className="space-y-4 text-base text-type-secondary">
                   <p className="text-white font-bold border-l-2 border-white pl-3">
-                    This is a fork of the original P-Stream. XP Technologies
+                    This is a fork of the original Movie-Web. R-Stream
                     holds no ownership over the original project and makes no
                     claim to it.
                   </p>
                   <p>
                     The original main contributor has stepped down and will no
-                    longer be responsible for any public hosting. We respect
-                    their decision and wish to keep their identity private.
+                    longer be responsible for any public hosting.
+            
                   </p>
                   <p>
-                    The XP Technologies team has taken on the responsibility of
+                    The R-Stream has taken on the responsibility of
                     continuing their legacy. We are committed to keeping
-                    P-Stream <strong className="text-white">open source</strong>{" "}
+                    R-Stream <strong className="text-white">open source</strong>{" "}
                     and{" "}
                     <strong className="text-white">completely ad-free</strong>.
                   </p>
