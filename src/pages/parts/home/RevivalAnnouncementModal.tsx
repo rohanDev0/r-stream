@@ -69,7 +69,7 @@ export function RevivalAnnouncementModal() {
                   </p>
                   <p>
                     <a
-                      href="https://github.com/xp-technologies-dev/p-stream"
+                      href="https://github.com/rohanDev0/r-stream"
                       target="_blank"
                       rel="noreferrer"
                       className="text-blue-400 hover:text-blue-300 underline transition-colors"
