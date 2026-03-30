@@ -1,6 +1,6 @@
 # P-Stream
 
-[![P-Stream Image](.github/Picsart_26-03-30_20-44-56-525.png)](https://p-stream.github.io/docs/)
+[![P-Stream Image](.github/Rstream.png)](https://p-stream.github.io/docs/)
 
 ## Quick Deploy
 
