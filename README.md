@@ -1,4 +1,4 @@
-# P-Stream
+# R-Stream
 
 [![P-Stream Image](.github/Rstream.png)](https://p-stream.github.io/docs/)
 
@@ -8,7 +8,7 @@
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/p-stream/p-stream)
 
-**NOTE: To self-host, more setup is required. Check the [docs](https://p-stream.github.io/docs/) to properly set up!!!!**
+**NOTE: To self-host, more setup is required. Check the [docs](https://docs.pstream.net) to properly set up!!!!**
 
 ## Links And Resources
 
