@@ -1,4 +1,3 @@
-
 import { useCallback, useEffect } from "react";
 
 import { IconPatch } from "@/components/buttons/IconPatch";
@@ -39,9 +38,7 @@ export function RevivalAnnouncementModal() {
               />
               <Flare.Child className="pointer-events-auto relative">
                 <div className="flex justify-between items-center mb-4">
-                  <h2 className="text-xl font-bold text-white">
-                    R-Stream
-                  </h2>
+                  <h2 className="text-xl font-bold text-white">R-Stream</h2>
                   <button
                     type="button"
                     className="text-type-secondary hover:text-white transition-transform hover:scale-95"
@@ -52,20 +49,18 @@ export function RevivalAnnouncementModal() {
                 </div>
                 <div className="space-y-4 text-base text-type-secondary">
                   <p className="text-white font-bold border-l-2 border-white pl-3">
-                    This is a fork of the original Movie-Web. I (Rohan)
-                    holds no ownership over the original project and makes no
-                    claim to it.
+                    This is a fork of the original Movie-Web. I (Rohan) holds no
+                    ownership over the original project and makes no claim to
+                    it.
                   </p>
                   <p>
                     The original main contributor has stepped down and will no
                     longer be responsible for any public hosting.
-            
                   </p>
                   <p>
-                    The R-Stream has taken on the responsibility of
-                    continuing their legacy. We are committed to keeping
-                    R-Stream <strong className="text-white">open source</strong>{" "}
-                    and{" "}
+                    The R-Stream has taken on the responsibility of continuing
+                    their legacy. We are committed to keeping R-Stream{" "}
+                    <strong className="text-white">open source</strong> and{" "}
                     <strong className="text-white">ad-free</strong>.
                   </p>
                   <p>

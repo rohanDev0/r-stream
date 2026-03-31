@@ -12,14 +12,14 @@
 
 ## Links And Resources
 
-| Service       | Link                                            | Source Code                                             |
-| ------------- | ----------------------------------------------- | ------------------------------------------------------- |
-| P-Stream Docs | [docs](https://p-stream.github.io/docs/)                | [source code](https://github.com/p-stream/docs)         |
+| Service       | Link                                                   | Source Code                                             |
+| ------------- | ------------------------------------------------------ | ------------------------------------------------------- |
+| P-Stream Docs | [docs](https://p-stream.github.io/docs/)               | [source code](https://github.com/p-stream/docs)         |
 | Extension     | [extension](https://p-stream.github.io/docs/extension) | [source code](https://github.com/p-stream/browser-ext)  |
 | Proxy         | [simple-proxy](https://p-stream.github.io/docs/proxy)  | [source code](https://github.com/p-stream/simple-proxy) |
-| Backend       | [backend](https://github.com/p-stream/backend)          | [source code](https://github.com/p-stream/backend)      |
+| Backend       | [backend](https://github.com/p-stream/backend)         | [source code](https://github.com/p-stream/backend)      |
 | Frontend      | [P-Stream](https://p-stream.github.io/docs/instances)  | [source code](https://github.com/p-stream/p-stream)     |
-| Weblate       | [weblate](https://p-stream.github.io/docs/weblate)          |                                                         |
+| Weblate       | [weblate](https://p-stream.github.io/docs/weblate)     |                                                         |
 
 ## Referrers
 
