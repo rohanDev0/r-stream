@@ -234,11 +234,11 @@
     "titles": {
       "day": {
         "default": "Was möchtisch a däm schöne nomitag aluege?",
-        "extra": ["Viva la P-Stream e ciao Svizzera"]
+        "extra": ["Viva la R-Stream e ciao Svizzera"]
       },
       "morning": {
         "default": "Was welsch a däm morge aluege?",
-        "extra": ["Viva la P-Stream!"]
+        "extra": ["Viva la R-Stream!"]
       },
       "night": {
         "default": "Besch no wach? Was möchtisch luege?",

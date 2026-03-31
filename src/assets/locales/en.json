@@ -439,15 +439,15 @@
     "titles": {
       "day": {
         "default": "What would you like to watch this afternoon?",
-        "extra": ["Viva la P-Stream!"]
+        "extra": ["Viva la R-Stream!"]
       },
       "morning": {
         "default": "What would you like to watch this morning?",
-        "extra": ["Viva la P-Stream!"]
+        "extra": ["Viva la R-Stream!"]
       },
       "night": {
         "default": "What would you like to watch tonight?",
-        "extra": ["Viva la P-Stream!"]
+        "extra": ["Viva la R-Stream!"]
       },
       "420": {
         "default": "What would you like to watch this 4/20?",
