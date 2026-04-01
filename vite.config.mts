@@ -68,7 +68,7 @@ export default defineConfig(({ mode }) => {
           name: "R-Stream",
           short_name: "R-Stream",
           description:
-            "Watch your favorite shows and movies for free with no ads ever! (っ'ヮ'c)",
+            "Watch your favorite shows and movies for free with no ads (っ'ヮ'c)",
           theme_color: "#000000",
           background_color: "#000000",
           display: "standalone",
