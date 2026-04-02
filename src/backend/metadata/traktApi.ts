@@ -53,7 +53,7 @@ const getFreshTurnstileToken = async (): Promise<{
 
   // Get new token from Cloudflare
   try {
-    const token = await getTurnstileToken("0x4AAAAAAB6ocCCpurfWRZyC");
+    const token = await getTurnstileToken("0x4AAAAAACzfOQmik3XK0GP4");
 
     // Store token in cookie with expiration
     if (typeof window !== "undefined") {
