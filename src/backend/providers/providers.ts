@@ -1,8 +1,12 @@
+import { vixsrc } from "./vixsrc";
+export const providers = [vixsrc];
+
 import {
   makeProviders,
   makeStandardFetcher,
   targets,
 } from "@p-stream/providers";
+
 
 import { isExtensionActiveCached } from "@/backend/extension/messaging";
 import {
@@ -44,6 +48,7 @@ export function getProviders() {
     fetcher: makeStandardFetcher(fetch),
     proxiedFetcher: makeLoadBalancedSimpleProxyFetcher(),
     target: targets.BROWSER,
+    
   });
 }
 
@@ -53,4 +58,4 @@ export function getAllProviders() {
     target: targets.BROWSER_EXTENSION,
     consistentIpForRequests: true,
   });
-}
+};
