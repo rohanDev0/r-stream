@@ -13,7 +13,6 @@ import {
 
 import { vixsrc } from "./vixsrc";
 
-
 // Initialize M3U8 proxy on module load
 setupM3U8Proxy();
 
@@ -38,6 +37,7 @@ export function getProviders() {
       proxiedFetcher: makeExtensionFetcher(),
       target: targets.BROWSER_EXTENSION,
       consistentIpForRequests: true,
+    
     });
   }
 
@@ -47,6 +47,7 @@ export function getProviders() {
     fetcher: makeStandardFetcher(fetch),
     proxiedFetcher: makeLoadBalancedSimpleProxyFetcher(),
     target: targets.BROWSER,
+  
   });
 }
 
