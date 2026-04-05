@@ -10,7 +10,9 @@ import {
   makeLoadBalancedSimpleProxyFetcher,
   setupM3U8Proxy,
 } from "@/backend/providers/fetchers";
+
 import { vixsrc } from "./vixsrc";
+
 export const providers = [vixsrc];
 
 // Initialize M3U8 proxy on module load
