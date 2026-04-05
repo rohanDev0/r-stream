@@ -37,7 +37,6 @@ export function getProviders() {
       proxiedFetcher: makeExtensionFetcher(),
       target: targets.BROWSER_EXTENSION,
       consistentIpForRequests: true,
-    
     });
   }
 
@@ -47,7 +46,6 @@ export function getProviders() {
     fetcher: makeStandardFetcher(fetch),
     proxiedFetcher: makeLoadBalancedSimpleProxyFetcher(),
     target: targets.BROWSER,
-  
   });
 }
 
