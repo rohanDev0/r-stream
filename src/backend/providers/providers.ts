@@ -1,12 +1,8 @@
-import { vixsrc } from "./vixsrc";
-export const providers = [vixsrc];
-
 import {
   makeProviders,
   makeStandardFetcher,
   targets,
 } from "@p-stream/providers";
-
 
 import { isExtensionActiveCached } from "@/backend/extension/messaging";
 import {
@@ -14,6 +10,8 @@ import {
   makeLoadBalancedSimpleProxyFetcher,
   setupM3U8Proxy,
 } from "@/backend/providers/fetchers";
+import { vixsrc } from "./vixsrc";
+export const providers = [vixsrc];
 
 // Initialize M3U8 proxy on module load
 setupM3U8Proxy();
@@ -48,7 +46,6 @@ export function getProviders() {
     fetcher: makeStandardFetcher(fetch),
     proxiedFetcher: makeLoadBalancedSimpleProxyFetcher(),
     target: targets.BROWSER,
-    
   });
 }
 
@@ -58,4 +55,4 @@ export function getAllProviders() {
     target: targets.BROWSER_EXTENSION,
     consistentIpForRequests: true,
   });
-};
+}
