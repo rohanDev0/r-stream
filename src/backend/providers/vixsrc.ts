@@ -10,7 +10,7 @@ export const vixsrc = {
     return {
       embeds: [
         {
-          url: url,
+          url,
         },
       ],
     };
