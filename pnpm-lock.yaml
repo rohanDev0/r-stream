@@ -44,7 +44,7 @@ importers:
         version: 1.8.0
       '@p-stream/providers':
         specifier: github:rohanDev0/providers#production
-        version: https://codeload.github.com/rohanDev0/providers/tar.gz/90beaa41e190578f11f174d03c090e33a6694d4d
+        version: https://codeload.github.com/rohanDev0/providers/tar.gz/697aa4ada5a17a5dc5a51cf5cf4e7cdfc84e9ebf
       '@plasmohq/messaging':
         specifier: ^0.6.2
         version: 0.6.2(react@18.3.1)
@@ -1691,8 +1691,8 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@p-stream/providers@https://codeload.github.com/rohanDev0/providers/tar.gz/90beaa41e190578f11f174d03c090e33a6694d4d':
-    resolution: {tarball: https://codeload.github.com/rohanDev0/providers/tar.gz/90beaa41e190578f11f174d03c090e33a6694d4d}
+  '@p-stream/providers@https://codeload.github.com/rohanDev0/providers/tar.gz/697aa4ada5a17a5dc5a51cf5cf4e7cdfc84e9ebf':
+    resolution: {tarball: https://codeload.github.com/rohanDev0/providers/tar.gz/697aa4ada5a17a5dc5a51cf5cf4e7cdfc84e9ebf}
     version: 3.2.0
 
   '@pkgjs/parseargs@0.11.0':
@@ -6748,7 +6748,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@p-stream/providers@https://codeload.github.com/rohanDev0/providers/tar.gz/90beaa41e190578f11f174d03c090e33a6694d4d':
+  '@p-stream/providers@https://codeload.github.com/rohanDev0/providers/tar.gz/697aa4ada5a17a5dc5a51cf5cf4e7cdfc84e9ebf':
     dependencies:
       abort-controller: 3.0.0
       cheerio: 1.0.0-rc.12
