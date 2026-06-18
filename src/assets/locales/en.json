@@ -13,12 +13,12 @@
     },
     "q1": {
       "title": "Where does the content come from?",
-      "body": "P-Stream does not host any content. When you click on something to watch, the internet is searched for the selected media (On the loading screen and in the 'video sources' tab you can see which source you're using). Media never gets uploaded by P-Stream, everything is through this searching mechanism.",
+      "body": "R-Stream does not host any content. When you click on something to watch, the internet is searched for the selected media (On the loading screen and in the 'video sources' tab you can see which source you're using). Media never gets uploaded by R-Stream, everything is through this searching mechanism.",
       "section": "general"
     },
     "q2": {
       "title": "Where can I request a show or movie?",
-      "body": "It's not possible to request a show or movie, P-Stream does not manage any content. All content is viewed through sources on the internet.",
+      "body": "It's not possible to request a show or movie, R-Stream does not manage any content. All content is viewed through sources on the internet.",
       "section": "search"
     },
     "q3": {
@@ -33,12 +33,12 @@
     },
     "q5": {
       "title": "How can I find out more?",
-      "body": "P-Stream has a Fluxer server that can be found at the header of this page!",
+      "body": "R-Stream has a Discord server that can be found at the header of this page!",
       "section": "general"
     },
     "q6": {
-      "title": "Is there a P-Stream app?",
-      "body": "Yes! We now have an official desktop app available for download! https://github.com/xp-technologies-dev/p-stream-desktop/releases",
+      "title": "Is there a R-Stream app?",
+      "body": "No! We don't have an official desktop app available for download! However, you can use R-Stream on any device with a web browser, including desktops, laptops, tablets, and smartphones. Just visit our website and log in to your account to start streaming your favorite content! or you can add R-Stream to your home screen for a more app-like experience.",
       "section": "general"
     },
     "q7": {
@@ -136,7 +136,7 @@
       "body": "Use the \"Customize\" option in subtitle settings or tap [ and ] on your keyboard to adjust. You can also upload your own subtitle file.",
       "section": "language"
     },
-    "title": "About P-Stream and FAQ (^▽^)"
+    "title": "About R-Stream and FAQ (^▽^)"
   },
   "actions": {
     "copied": "Copied",

@@ -11,8 +11,6 @@ import {
   setupM3U8Proxy,
 } from "@/backend/providers/fetchers";
 
-import { vixsrc } from "./vixsrc";
-
 // Initialize M3U8 proxy on module load
 setupM3U8Proxy();
 

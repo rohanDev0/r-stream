@@ -14,6 +14,51 @@ import { usePreferencesStore } from "@/stores/preferences";
 import { useWatchPartyStore } from "@/stores/watchParty";
 import { isAutoplayAllowed } from "@/utils/autoplay";
 
+function Slider(props: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  onChange: (v: number) => void;
+  onReset: () => void;
+  defaultValue: number;
+  unit?: string;
+}) {
+  return (
+    <div className="space-y-1">
+      <div className="flex justify-between items-center">
+        <span className="text-sm text-type-secondary">{props.label}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-white tabular-nums">
+            {props.value}
+            {props.unit ?? ""}
+          </span>
+          {props.value !== props.defaultValue && (
+            <button
+              type="button"
+              className="text-xs text-type-secondary hover:text-white tabbable"
+              onClick={props.onReset}
+            >
+              <Icon icon={Icons.X} className="text-sm" />
+            </button>
+          )}
+        </div>
+      </div>
+      <input
+        type="range"
+        min={props.min}
+        max={props.max}
+        step={props.step}
+        value={props.value}
+        onChange={(e) => props.onChange(Number(e.target.value))}
+        className="w-full accent-video-context-light cursor-pointer"
+        aria-label={props.label}
+      />
+    </div>
+  );
+}
+
 function ButtonList(props: {
   options: number[];
   selected: number;
