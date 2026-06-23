@@ -14,6 +14,7 @@ export function sortMediaItems(
   sortBy: SortOption,
   bookmarks?: Record<string, BookmarkMediaItem>,
   progressItems?: Record<string, ProgressMediaItem>,
+  runtimeData?: Record<string, number>,
 ): MediaItem[] {
   const sorted = [...items];
 

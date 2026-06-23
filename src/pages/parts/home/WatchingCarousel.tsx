@@ -39,7 +39,14 @@ export function WatchingCarousel({
   const { t } = useTranslation();
   const browser = !!window.chrome;
   let isScrolling = false;
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(() => {
+    return localStorage.getItem("__MW::watchingEditing") === "true";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("__MW::watchingEditing", editing.toString());
+  }, [editing]);
+
   const [sortBy, setSortBy] = useState<SortOption>(() => {
     const saved = localStorage.getItem("__MW::watchingSort");
     return (saved as SortOption) || "date";
@@ -193,7 +200,7 @@ export function WatchingCarousel({
           />
         </div>
       )}
-      <div className="relative overflow-visible carousel-container md:pb-4">
+      <div className="relative overflow-hidden carousel-container md:pb-4">
         <div
           id={`carousel-${categorySlug}`}
           className="grid grid-flow-col auto-cols-max gap-4 pt-0 overflow-x-scroll scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
