@@ -28,7 +28,7 @@ export function RevivalAnnouncementModal() {
     <OverlayPortal darken close={handleClose} show={modal.isShown}>
       <div className="flex absolute inset-0 items-center justify-center p-4 overflow-hidden">
         <div className="overflow-y-auto max-h-[85vh] pointer-events-auto">
-          <Flare.Base className="group rounded-3xl bg-background-main transition-colors duration-300 focus:relative focus:z-10 w-full max-w-lg p-6 bg-mediaCard-hoverBackground bg-opacity-60 backdrop-filter backdrop-blur-lg shadow-lg">
+          <Flare.Base className="group rounded-3xl bg-background-main transition-colors duration-300 focus:relative focus:z-10 w-full max-w-lg p-6 bg-opacity-60 backdrop-filter backdrop-blur-lg shadow-lg">
             <div className="overflow-y-auto overflow-x-hidden max-h-[85vh]">
               <Flare.Light
                 flareSize={300}
