@@ -366,9 +366,10 @@ export function BookmarksCarousel({
                         {sortOptions.map((opt) => (
                           <Listbox.Option
                             className={({ active }) =>
-                              `cursor-pointer min-w-60 flex gap-4 items-center relative select-none py-2 px-4 mx-1 rounded-lg ${active
-                                ? "bg-background-secondaryHover text-type-link"
-                                : "text-type-secondary"
+                              `cursor-pointer min-w-60 flex gap-4 items-center relative select-none py-2 px-4 mx-1 rounded-lg ${
+                                active
+                                  ? "bg-background-secondaryHover text-type-link"
+                                  : "text-type-secondary"
                               }`
                             }
                             key={opt.id}
@@ -485,9 +486,10 @@ export function BookmarksCarousel({
                       {sortOptions.map((opt) => (
                         <Listbox.Option
                           className={({ active }) =>
-                            `cursor-pointer min-w-60 flex gap-4 items-center relative select-none py-2 px-4 mx-1 rounded-lg ${active
-                              ? "bg-background-secondaryHover text-type-link"
-                              : "text-type-secondary"
+                            `cursor-pointer min-w-60 flex gap-4 items-center relative select-none py-2 px-4 mx-1 rounded-lg ${
+                              active
+                                ? "bg-background-secondaryHover text-type-link"
+                                : "text-type-secondary"
                             }`
                           }
                           key={opt.id}
@@ -528,31 +530,31 @@ export function BookmarksCarousel({
 
                 {section.items.length > 0
                   ? section.items
-                    .slice(0, MAX_ITEMS_PER_SECTION)
-                    .map((media) => (
-                      <div
-                        key={media.id}
-                        onContextMenu={(
-                          e: React.MouseEvent<HTMLDivElement>,
-                        ) => e.preventDefault()}
-                        className="relative mt-4 group cursor-pointer rounded-xl p-2 bg-transparent transition-colors duration-300 w-[10rem] md:w-[11.5rem] h-auto"
-                      >
-                        <WatchedMediaCard
+                      .slice(0, MAX_ITEMS_PER_SECTION)
+                      .map((media) => (
+                        <div
                           key={media.id}
-                          media={media}
-                          onShowDetails={onShowDetails}
-                          closable={editing}
-                          onClose={() => removeBookmark(media.id)}
-                          editable={editing}
-                          onEdit={(e) => handleEditBookmark(media.id, e)}
-                        />
-                      </div>
-                    ))
+                          onContextMenu={(
+                            e: React.MouseEvent<HTMLDivElement>,
+                          ) => e.preventDefault()}
+                          className="relative mt-4 group cursor-pointer rounded-xl p-2 bg-transparent transition-colors duration-300 w-[10rem] md:w-[11.5rem] h-auto"
+                        >
+                          <WatchedMediaCard
+                            key={media.id}
+                            media={media}
+                            onShowDetails={onShowDetails}
+                            closable={editing}
+                            onClose={() => removeBookmark(media.id)}
+                            editable={editing}
+                            onEdit={(e) => handleEditBookmark(media.id, e)}
+                          />
+                        </div>
+                      ))
                   : Array.from({ length: SKELETON_COUNT }).map(() => (
-                    <MediaCardSkeleton
-                      key={`skeleton-${categorySlug}-${Math.random().toString(36).substring(7)}`}
-                    />
-                  ))}
+                      <MediaCardSkeleton
+                        key={`skeleton-${categorySlug}-${Math.random().toString(36).substring(7)}`}
+                      />
+                    ))}
 
                 {section.items.length > MAX_ITEMS_PER_SECTION && (
                   <MoreBookmarksCard />
