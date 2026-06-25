@@ -80,13 +80,13 @@ export function WatchingCarousel({
     return sortMediaItems(output, sortBy, undefined, progressItems);
   }, [progressItems, sortBy]);
 
-  const handleWheel = (e: React.WheelEvent) => {
+  const handleWheel = (_e: React.WheelEvent) => {
     if (isScrolling) return;
     isScrolling = true;
 
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.stopPropagation();
-      e.preventDefault();
+    if (Math.abs(_e.deltaX) > Math.abs(_e.deltaY)) {
+      _e.stopPropagation();
+      _e.preventDefault();
     }
 
     if (browser) {
@@ -203,7 +203,11 @@ export function WatchingCarousel({
       <div className="relative overflow-hidden carousel-container md:pb-4">
         <div
           id={`carousel-${categorySlug}`}
-          className="grid grid-flow-col auto-cols-max gap-4 pt-0 overflow-x-scroll scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
+          className="flex flex-row gap-4 pt-0 overflow-x-auto scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
+          style={{
+            touchAction: "pan-x",
+            WebkitOverflowScrolling: "touch" as any,
+          }} // Allow horizontal scrolling on touch devices
           ref={(el) => {
             carouselRefs.current[categorySlug] = el;
           }}
