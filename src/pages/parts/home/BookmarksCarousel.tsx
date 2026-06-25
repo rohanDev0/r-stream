@@ -234,13 +234,13 @@ export function BookmarksCarousel({
   }, [groupedItems, regularItems, groupOrder]);
   // kill me
 
-  const handleWheel = (e: React.WheelEvent) => {
+  const handleWheel = (_e: React.WheelEvent) => {
     if (isScrolling) return;
     isScrolling = true;
 
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      e.stopPropagation();
-      e.preventDefault();
+    if (Math.abs(_e.deltaX) > Math.abs(_e.deltaY)) {
+      _e.stopPropagation();
+      _e.preventDefault();
     }
 
     if (browser) {
@@ -308,6 +308,10 @@ export function BookmarksCarousel({
       {sortedSections.map((section) => {
         if (section.type === "grouped") {
           const { icon, name } = parseGroupString(section.group || "");
+          function handleWheel(event: React.WheelEvent<HTMLDivElement>): void {
+            throw new Error("Function not implemented.");
+          }
+
           return (
             <div key={section.group}>
               <SectionHeading
@@ -397,10 +401,11 @@ export function BookmarksCarousel({
                   />
                 </div>
               )}
-              <div className="relative overflow-hidden carousel-container md:pb-4">
+              <div className="relative overflow-visible carousel-container md:pb-4">
                 <div
                   id={`carousel-${section.group}`}
-                  className="grid grid-flow-col auto-cols-max gap-4 pt-0 overflow-x-scroll scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
+                  className="flex flex-row gap-4 pt-0 overflow-x-scroll scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
+                  style={{ touchAction: "pan-x", WebkitOverflowScrolling: "touch" as any }}
                   ref={(el) => {
                     carouselRefs.current[section.group || "bookmarks"] = el;
                   }}
@@ -447,6 +452,10 @@ export function BookmarksCarousel({
             </div>
           );
         } // regular items
+        function handleWheel(event: React.WheelEvent<HTMLDivElement>): void {
+          throw new Error("Function not implemented.");
+        }
+
         return (
           <div key="regular-bookmarks">
             <SectionHeading
@@ -517,10 +526,10 @@ export function BookmarksCarousel({
                 />
               </div>
             )}
-            <div className="relative overflow-hidden carousel-container md:pb-4">
+            <div className="relative overflow-visible carousel-container md:pb-4">
               <div
                 id={`carousel-${categorySlug}`}
-                className="grid grid-flow-col auto-cols-max gap-4 pt-0 overflow-x-scroll scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
+                className="flex flex-row overflow-x-auto scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
                 ref={(el) => {
                   carouselRefs.current[categorySlug] = el;
                 }}
