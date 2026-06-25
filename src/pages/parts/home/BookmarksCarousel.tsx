@@ -404,7 +404,7 @@ export function BookmarksCarousel({
               <div className="relative overflow-visible carousel-container md:pb-4">
                 <div
                   id={`carousel-${section.group}`}
-                  className="flex flex-row gap-4 pt-0 overflow-x-scroll scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
+                  className="flex flex-row gap-4 pt-0 overflow-x-auto scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
                   style={{ touchAction: "pan-x", WebkitOverflowScrolling: "touch" as any }}
                   ref={(el) => {
                     carouselRefs.current[section.group || "bookmarks"] = el;
