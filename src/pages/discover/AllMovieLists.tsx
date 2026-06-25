@@ -78,10 +78,10 @@ export function DiscoverMore() {
     }
   };
 
-  const handleWheel = (_e: React.WheelEvent) => {
-    if (Math.abs(_e.deltaX) > Math.abs(_e.deltaY)) {
-      _e.stopPropagation();
-      _e.preventDefault();
+  const handleWheel = (e: React.WheelEvent) => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+      e.stopPropagation();
+      e.preventDefault();
     }
   };
 
@@ -141,11 +141,7 @@ export function DiscoverMore() {
             </div>
             <div className="relative overflow-hidden carousel-container md:pb-4">
               <div
-                className="flex flex-row gap-4 pt-0 overflow-x-auto scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
-                style={{
-                  touchAction: "pan-x",
-                  WebkitOverflowScrolling: "touch" as any,
-                }} // Allow horizontal scrolling on touch devices
+                className="grid grid-flow-col auto-cols-max gap-4 pt-0 overflow-x-scroll scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
                 ref={(el) => {
                   carouselRefs.current[list.listSlug] = el;
                 }}

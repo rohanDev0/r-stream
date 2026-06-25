@@ -88,11 +88,7 @@ export function PersonalRecommendationsCarousel({
       <div className="relative overflow-hidden carousel-container md:pb-4">
         <div
           id={`carousel-${categorySlug}`}
-          className="flex flex-row gap-4 pt-0 overflow-x-auto scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
-          style={{
-            touchAction: "pan-x",
-            WebkitOverflowScrolling: "touch" as any,
-          }} // Allow horizontal scrolling on touch devices
+          className="grid grid-flow-col auto-cols-max gap-4 pt-0 overflow-x-scroll scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
           ref={(el) => {
             carouselRefs.current[categorySlug] = el;
           }}
