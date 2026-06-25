@@ -40,7 +40,7 @@ interface BookmarksCarouselProps {
   onShowDetails?: (media: MediaItem) => void;
 }
 
-const MAX_ITEMS_PER_SECTION = 20; // Limit items per section
+const MAX_ITEMS_PER_SECTION = 20;
 
 function MediaCardSkeleton() {
   return (
@@ -85,13 +85,23 @@ function MoreBookmarksCard() {
   );
 }
 
+/* ✅ Single carousel div — reused for both grouped and regular sections
+function CarouselTrack({
+  id,
+  carouselRef,
+}: {
+  id: string;
+  carouselRef: (el: HTMLDivElement | null) => void;
+  children?: React.ReactNode;
+}) {
+  return null; // placeholder — see usage below
+}
+*/
 export function BookmarksCarousel({
   carouselRefs,
   onShowDetails,
 }: BookmarksCarouselProps) {
   const { t } = useTranslation();
-  const browser = !!window.chrome;
-  let isScrolling = false;
   const [editing, setEditing] = useState(false);
   const [sortBy, setSortBy] = useState<SortOption>(() => {
     const saved = localStorage.getItem("__MW::bookmarksSort");
@@ -103,7 +113,6 @@ export function BookmarksCarousel({
     localStorage.setItem("__MW::bookmarksSort", sortBy);
   }, [sortBy]);
 
-  // Editing modals
   const editBookmarkModal = useModal("bookmark-edit-carousel");
   const editGroupModal = useModal("bookmark-edit-group-carousel");
   const [editingBookmarkId, setEditingBookmarkId] = useState<string | null>(
@@ -128,10 +137,7 @@ export function BookmarksCarousel({
   const items = useMemo(() => {
     const output: MediaItem[] = [];
     Object.entries(bookmarks).forEach((entry) => {
-      output.push({
-        id: entry[0],
-        ...entry[1],
-      });
+      output.push({ id: entry[0], ...entry[1] });
     });
     return sortMediaItems(output, sortBy, bookmarks, progressItems);
   }, [bookmarks, progressItems, sortBy]);
@@ -144,9 +150,7 @@ export function BookmarksCarousel({
       const bookmark = bookmarks[item.id];
       if (Array.isArray(bookmark?.group)) {
         bookmark.group.forEach((groupName) => {
-          if (!grouped[groupName]) {
-            grouped[groupName] = [];
-          }
+          if (!grouped[groupName]) grouped[groupName] = [];
           grouped[groupName].push(item);
         });
       } else {
@@ -154,7 +158,6 @@ export function BookmarksCarousel({
       }
     });
 
-    // Sort items within each group
     Object.keys(grouped).forEach((group) => {
       grouped[group] = sortMediaItems(
         grouped[group],
@@ -164,14 +167,12 @@ export function BookmarksCarousel({
       );
     });
 
-    // Sort regular items
     const sortedRegular = sortMediaItems(
       regular,
       sortBy,
       bookmarks,
       progressItems,
     );
-
     return { groupedItems: grouped, regularItems: sortedRegular };
   }, [items, bookmarks, progressItems, sortBy]);
 
@@ -182,22 +183,15 @@ export function BookmarksCarousel({
       items: MediaItem[];
     }> = [];
 
-    // Create a combined map of all sections (grouped + regular)
     const allSections = new Map<string, MediaItem[]>();
-
-    // Add grouped sections
     Object.entries(groupedItems).forEach(([group, groupItems]) => {
       allSections.set(group, groupItems);
     });
-
-    // Add regular bookmarks as "bookmarks" group
     if (regularItems.length > 0) {
       allSections.set("bookmarks", regularItems);
     }
 
-    // Sort sections based on group order
     if (groupOrder.length === 0) {
-      // No order set, use default order
       allSections.forEach((sectionItems, group) => {
         if (group === "bookmarks") {
           sections.push({ type: "regular", items: sectionItems });
@@ -206,11 +200,9 @@ export function BookmarksCarousel({
         }
       });
     } else {
-      // Use the saved order
       const orderMap = new Map(
         groupOrder.map((group, index) => [group, index]),
       );
-
       Array.from(allSections.entries())
         .sort(([groupA], [groupB]) => {
           const orderA = orderMap.has(groupA)
@@ -232,24 +224,10 @@ export function BookmarksCarousel({
 
     return sections;
   }, [groupedItems, regularItems, groupOrder]);
-  // kill me
 
-  const handleWheel = (_e: React.WheelEvent) => {
-    if (isScrolling) return;
-    isScrolling = true;
-
-    if (Math.abs(_e.deltaX) > Math.abs(_e.deltaY)) {
-      _e.stopPropagation();
-      _e.preventDefault();
-    }
-
-    if (browser) {
-      setTimeout(() => {
-        isScrolling = false;
-      }, 345);
-    } else {
-      isScrolling = false;
-    }
+  // ✅ ONE handleWheel — at component level, does nothing (CSS handles scroll)
+  const handleWheel = (_e: React.WheelEvent<HTMLDivElement>) => {
+    // Native CSS scroll handles everything — no JS needed
   };
 
   const handleEditBookmark = (bookmarkId: string, e?: React.MouseEvent) => {
@@ -296,22 +274,130 @@ export function BookmarksCarousel({
 
   const selectedSortOption =
     sortOptions.find((opt) => opt.id === sortBy) || sortOptions[0];
-
   const categorySlug = "bookmarks";
-  const SKELETON_COUNT = 10;
 
   if (bookmarksLength === 0) return null;
 
+  // ✅ Reusable sort dropdown JSX
+  const SortDropdown = (
+    <Dropdown
+      selectedItem={selectedSortOption}
+      setSelectedItem={(item) => {
+        const newSort = item.id as SortOption;
+        setSortBy(newSort);
+        localStorage.setItem("__MW::bookmarksSort", newSort);
+      }}
+      options={sortOptions}
+      customButton={
+        <button
+          type="button"
+          className="px-2 py-1 text-sm bg-mediaCard-hoverBackground rounded-full hover:bg-mediaCard-background transition-colors flex items-center gap-1"
+        >
+          <span>{selectedSortOption.name}</span>
+          <Icon
+            icon={Icons.UP_DOWN_ARROW}
+            className="text-xs text-dropdown-secondary"
+          />
+        </button>
+      }
+      side="left"
+      customMenu={
+        <Listbox.Options static className="py-1">
+          {sortOptions.map((opt) => (
+            <Listbox.Option
+              className={({ active }) =>
+                `cursor-pointer min-w-60 flex gap-4 items-center relative select-none py-2 px-4 mx-1 rounded-lg ${
+                  active
+                    ? "bg-background-secondaryHover text-type-link"
+                    : "text-type-secondary"
+                }`
+              }
+              key={opt.id}
+              value={opt}
+            >
+              {({ selected }) => (
+                <>
+                  <span
+                    className={`block ${selected ? "font-medium" : "font-normal"}`}
+                  >
+                    {opt.name}
+                  </span>
+                  {selected && (
+                    <Icon
+                      icon={Icons.CHECKMARK}
+                      className="text-xs text-type-link"
+                    />
+                  )}
+                </>
+              )}
+            </Listbox.Option>
+          ))}
+        </Listbox.Options>
+      }
+    />
+  );
+
   return (
     <>
-      {/* Grouped Bookmarks Carousels */}
       {sortedSections.map((section) => {
+        const carouselId = section.group || "bookmarks";
+
+        // ✅ Shared carousel track — same for grouped and regular
+        const carouselTrack = (
+          <div className="relative overflow-visible carousel-container md:pb-4">
+            <div
+              id={`carousel-${carouselId}`}
+              className="flex flex-row gap-4 pt-0 overflow-x-auto overflow-y-hidden scrollbar-none rounded-xl md:pl-8 md:pr-8"
+              style={{
+                touchAction: "pan-x",
+                WebkitOverflowScrolling: "touch" as any,
+              }}
+              ref={(el) => {
+                carouselRefs.current[carouselId] = el;
+              }}
+              onWheel={handleWheel}
+            >
+              <div className="lg:w-12" />
+
+              {section.items.slice(0, MAX_ITEMS_PER_SECTION).map((media) => (
+                <div
+                  key={media.id}
+                  onContextMenu={(e: React.MouseEvent<HTMLDivElement>) =>
+                    e.preventDefault()
+                  }
+                  className="relative mt-4 group cursor-pointer rounded-xl p-2 bg-transparent transition-colors duration-300 w-[10rem] md:w-[11.5rem] h-auto"
+                >
+                  <WatchedMediaCard
+                    key={media.id}
+                    media={media}
+                    onShowDetails={onShowDetails}
+                    closable={editing}
+                    onClose={() => removeBookmark(media.id)}
+                    editable={editing}
+                    onEdit={(e) => handleEditBookmark(media.id, e)}
+                  />
+                </div>
+              ))}
+
+              {section.items.length > MAX_ITEMS_PER_SECTION && (
+                <MoreBookmarksCard />
+              )}
+
+              <div className="lg:w-12" />
+            </div>
+
+            {!isMobile && (
+              <CarouselNavButtons
+                categorySlug={carouselId}
+                carouselRefs={carouselRefs}
+              />
+            )}
+          </div>
+        );
+
+        // ✅ Grouped section
         if (section.type === "grouped") {
           const { icon, name } = parseGroupString(section.group || "");
-          function handleWheel(event: React.WheelEvent<HTMLDivElement>): void {
-            throw new Error("Function not implemented.");
-          }
-
           return (
             <div key={section.group}>
               <SectionHeading
@@ -342,123 +428,19 @@ export function BookmarksCarousel({
                   />
                 </div>
               </SectionHeading>
+
               {editing && (
                 <div className="mt-4 -mb-4 ml-4 lg:ml-12 lg:pl-[48px]">
-                  <Dropdown
-                    selectedItem={selectedSortOption}
-                    setSelectedItem={(item) => {
-                      const newSort = item.id as SortOption;
-                      setSortBy(newSort);
-                      localStorage.setItem("__MW::bookmarksSort", newSort);
-                    }}
-                    options={sortOptions}
-                    customButton={
-                      <button
-                        type="button"
-                        className="px-2 py-1 text-sm bg-mediaCard-hoverBackground rounded-full hover:bg-mediaCard-background transition-colors flex items-center gap-1"
-                      >
-                        <span>{selectedSortOption.name}</span>
-                        <Icon
-                          icon={Icons.UP_DOWN_ARROW}
-                          className="text-xs text-dropdown-secondary"
-                        />
-                      </button>
-                    }
-                    side="left"
-                    customMenu={
-                      <Listbox.Options static className="py-1">
-                        {sortOptions.map((opt) => (
-                          <Listbox.Option
-                            className={({ active }) =>
-                              `cursor-pointer min-w-60 flex gap-4 items-center relative select-none py-2 px-4 mx-1 rounded-lg ${
-                                active
-                                  ? "bg-background-secondaryHover text-type-link"
-                                  : "text-type-secondary"
-                              }`
-                            }
-                            key={opt.id}
-                            value={opt}
-                          >
-                            {({ selected }) => (
-                              <>
-                                <span
-                                  className={`block ${selected ? "font-medium" : "font-normal"}`}
-                                >
-                                  {opt.name}
-                                </span>
-                                {selected && (
-                                  <Icon
-                                    icon={Icons.CHECKMARK}
-                                    className="text-xs text-type-link"
-                                  />
-                                )}
-                              </>
-                            )}
-                          </Listbox.Option>
-                        ))}
-                      </Listbox.Options>
-                    }
-                  />
+                  {SortDropdown}
                 </div>
               )}
-              <div className="relative overflow-visible carousel-container md:pb-4">
-                <div
-                  id={`carousel-${section.group}`}
-                  className="flex flex-row gap-4 pt-0 overflow-x-auto scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
-                  style={{
-                    touchAction: "pan-x",
-                    WebkitOverflowScrolling: "touch" as any,
-                  }}
-                  ref={(el) => {
-                    carouselRefs.current[section.group || "bookmarks"] = el;
-                  }}
-                  onWheel={handleWheel}
-                >
-                  <div className="lg:w-12" />
 
-                  {section.items
-                    .slice(0, MAX_ITEMS_PER_SECTION)
-                    .map((media) => (
-                      <div
-                        key={media.id}
-                        onContextMenu={(e: React.MouseEvent<HTMLDivElement>) =>
-                          e.preventDefault()
-                        }
-                        className="relative mt-4 group cursor-pointer rounded-xl p-2 bg-transparent transition-colors duration-300 w-[10rem] md:w-[11.5rem] h-auto"
-                      >
-                        <WatchedMediaCard
-                          key={media.id}
-                          media={media}
-                          onShowDetails={onShowDetails}
-                          closable={editing}
-                          onClose={() => removeBookmark(media.id)}
-                          editable={editing}
-                          onEdit={(e) => handleEditBookmark(media.id, e)}
-                        />
-                      </div>
-                    ))}
-
-                  {section.items.length > MAX_ITEMS_PER_SECTION && (
-                    <MoreBookmarksCard />
-                  )}
-
-                  <div className="lg:w-12" />
-                </div>
-
-                {!isMobile && (
-                  <CarouselNavButtons
-                    categorySlug={section.group || "bookmarks"}
-                    carouselRefs={carouselRefs}
-                  />
-                )}
-              </div>
+              {carouselTrack}
             </div>
           );
-        } // regular items
-        function handleWheel(event: React.WheelEvent<HTMLDivElement>): void {
-          throw new Error("Function not implemented.");
         }
 
+        // ✅ Regular (ungrouped) section
         return (
           <div key="regular-bookmarks">
             <SectionHeading
@@ -474,134 +456,32 @@ export function BookmarksCarousel({
                 />
               </div>
             </SectionHeading>
+
             {editing && (
               <div className="mt-4 -mb-4 ml-4 lg:ml-12 lg:pl-[48px]">
-                <Dropdown
-                  selectedItem={selectedSortOption}
-                  setSelectedItem={(item) => setSortBy(item.id as SortOption)}
-                  options={sortOptions}
-                  customButton={
-                    <button
-                      type="button"
-                      className="px-2 py-1 text-sm bg-mediaCard-hoverBackground rounded-full hover:bg-mediaCard-background transition-colors flex items-center gap-1"
-                    >
-                      <span>{selectedSortOption.name}</span>
-                      <Icon
-                        icon={Icons.UP_DOWN_ARROW}
-                        className="text-xs text-dropdown-secondary"
-                      />
-                    </button>
-                  }
-                  side="left"
-                  customMenu={
-                    <Listbox.Options static className="py-1">
-                      {sortOptions.map((opt) => (
-                        <Listbox.Option
-                          className={({ active }) =>
-                            `cursor-pointer min-w-60 flex gap-4 items-center relative select-none py-2 px-4 mx-1 rounded-lg ${
-                              active
-                                ? "bg-background-secondaryHover text-type-link"
-                                : "text-type-secondary"
-                            }`
-                          }
-                          key={opt.id}
-                          value={opt}
-                        >
-                          {({ selected }) => (
-                            <>
-                              <span
-                                className={`block ${selected ? "font-medium" : "font-normal"}`}
-                              >
-                                {opt.name}
-                              </span>
-                              {selected && (
-                                <Icon
-                                  icon={Icons.CHECKMARK}
-                                  className="text-xs text-type-link"
-                                />
-                              )}
-                            </>
-                          )}
-                        </Listbox.Option>
-                      ))}
-                    </Listbox.Options>
-                  }
-                />
+                {SortDropdown}
               </div>
             )}
-            <div className="relative overflow-visible carousel-container md:pb-4">
-              <div
-                id={`carousel-${categorySlug}`}
-                className="flex flex-row overflow-x-auto scrollbar-none rounded-xl overflow-y-hidden md:pl-8 md:pr-8"
-                ref={(el) => {
-                  carouselRefs.current[categorySlug] = el;
-                }}
-                onWheel={handleWheel}
-              >
-                <div className="lg:w-12" />
 
-                {section.items.length > 0
-                  ? section.items
-                      .slice(0, MAX_ITEMS_PER_SECTION)
-                      .map((media) => (
-                        <div
-                          key={media.id}
-                          onContextMenu={(
-                            e: React.MouseEvent<HTMLDivElement>,
-                          ) => e.preventDefault()}
-                          className="relative mt-4 group cursor-pointer rounded-xl p-2 bg-transparent transition-colors duration-300 w-[10rem] md:w-[11.5rem] h-auto"
-                        >
-                          <WatchedMediaCard
-                            key={media.id}
-                            media={media}
-                            onShowDetails={onShowDetails}
-                            closable={editing}
-                            onClose={() => removeBookmark(media.id)}
-                            editable={editing}
-                            onEdit={(e) => handleEditBookmark(media.id, e)}
-                          />
-                        </div>
-                      ))
-                  : Array.from({ length: SKELETON_COUNT }).map(() => (
-                      <MediaCardSkeleton
-                        key={`skeleton-${categorySlug}-${Math.random().toString(36).substring(7)}`}
-                      />
-                    ))}
-
-                {section.items.length > MAX_ITEMS_PER_SECTION && (
-                  <MoreBookmarksCard />
-                )}
-
-                <div className="lg:w-12" />
-              </div>
-
-              {!isMobile && (
-                <CarouselNavButtons
-                  categorySlug={categorySlug}
-                  carouselRefs={carouselRefs}
-                />
-              )}
-            </div>
+            {carouselTrack}
           </div>
         );
       })}
 
-      {/* Edit Bookmark Modal */}
+      {/* Modals */}
       <EditBookmarkModal
-        id={editBookmarkModal.id}
+        id="edit-bookmark-modal"
         isShown={editBookmarkModal.isShown}
         bookmarkId={editingBookmarkId}
-        onCancel={handleCancelEditBookmark}
         onSave={handleSaveBookmark}
+        onCancel={handleCancelEditBookmark}
       />
-
-      {/* Edit Group Modal */}
       <EditGroupModal
-        id={editGroupModal.id}
+        id="edit-group-modal"
         isShown={editGroupModal.isShown}
         groupName={editingGroupName}
-        onCancel={handleCancelEditGroup}
         onSave={handleSaveGroup}
+        onCancel={handleCancelEditGroup}
       />
     </>
   );
