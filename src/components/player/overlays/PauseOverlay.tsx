@@ -183,9 +183,9 @@ export function PauseOverlay() {
       {/* Main content - left-center aligned, vertically anchored near bottom */}
       <div className="flex-1 flex items-end pb-36 md:pb-44">
         <div className="ml-24 md:ml-48 lg:ml-64 max-w-lg lg:max-w-2xl">
-          {/* "You are watching" label */}
+          {/* "Watching" label */}
           <p className="text-sm text-white/70 mb-3 tracking-wide uppercase">
-            {t("player.pauseOverlay.youAreWatching", "You are watching")}
+            {t("player.pauseOverlay.Watching", "Watching")}
           </p>
 
           {/* Title / Logo */}
@@ -253,7 +253,7 @@ export function PauseOverlay() {
       {/* "Paused" indicator - bottom right, raised up to avoid controls overlap */}
       <div className="absolute bottom-20 right-8 md:right-12">
         <span className="text-base text-white/60 tracking-wider">
-          {t("player.pauseOverlay.paused", "Paused")}
+          {t("player.pauseOverlay.watching", "Watching")}
         </span>
       </div>
     </div>
