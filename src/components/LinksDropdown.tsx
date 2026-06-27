@@ -210,7 +210,7 @@ function WatchPartyInputLink() {
 export function LinksDropdown(props: { children: React.ReactNode }) {
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const revivalModal = useModal("revival-announcement");
+  // const revivalModal = useModal("revival-announcement");
   const deviceName = useAuthStore((s) => s.account?.deviceName);
   const seed = useAuthStore((s) => s.account?.seed);
   const bufferSeed = useMemo(
@@ -328,7 +328,7 @@ export function LinksDropdown(props: { children: React.ReactNode }) {
           <DropdownLink href="/about" icon={Icons.CIRCLE_QUESTION}>
             {t("navigation.menu.about")}
           </DropdownLink>
-          <DropdownLink
+          {/* <DropdownLink
             onClick={() => {
               revivalModal.show();
               setOpen(false);
@@ -336,7 +336,7 @@ export function LinksDropdown(props: { children: React.ReactNode }) {
             icon={Icons.RISING_STAR}
           >
             Stream Revival
-          </DropdownLink>
+          </DropdownLink> */}
           {!enableLowPerformanceMode && (
             <DropdownLink href="/discover" icon={Icons.RISING_STAR}>
               {t("navigation.menu.discover")}
