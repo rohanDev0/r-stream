@@ -91,8 +91,8 @@ function VideoElement() {
     }
     if (videoHueRotate !== 0) {
       parts.push(`hue-rotate(${videoHueRotate}deg)`);
-      return parts.length ? parts.join(" ") : undefined;
     }
+    return parts.length ? parts.join(" ") : undefined;
   }, [videoBrightness, videoContrast, videoSaturation, videoHueRotate]);
 
   useEffect(() => {

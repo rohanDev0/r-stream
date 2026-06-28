@@ -232,6 +232,9 @@ export function PlaybackSettingsView({ id }: { id: string }) {
   const videoBrightness = usePreferencesStore((s) => s.videoBrightness);
   const setVideoBrightness = usePreferencesStore((s) => s.setVideoBrightness);
   const volumeBoostEnabled = usePreferencesStore((s) => s.enableHoldToBoost);
+  const setVolumeBoostEnabled = usePreferencesStore(
+    (s) => s.setEnableHoldToBoost,
+  );
   const volumeBoostLevel = usePreferencesStore((s) => s.volumeBoost);
   const setVolumeBoostLevel = usePreferencesStore((s) => s.setVolumeBoost);
 
@@ -303,9 +306,10 @@ export function PlaybackSettingsView({ id }: { id: string }) {
 
   // Handle volume boost toggle
   const handleVolumeBoostToggle = useCallback(() => {
-    const newValue = volumeBoostLevel > 100 ? 100 : 200; // Toggle between 100% and 200%
+    const newValue = volumeBoostEnabled ? 100 : 200; // Toggle between 100% and 200%
     setVolumeBoostLevel(newValue);
-  }, [volumeBoostLevel, setVolumeBoostLevel]);
+    setVolumeBoostEnabled(!volumeBoostEnabled);
+  }, [setVolumeBoostLevel, volumeBoostEnabled, setVolumeBoostEnabled]);
 
   // Force 1x speed in watch party
   useEffect(() => {
@@ -374,7 +378,7 @@ export function PlaybackSettingsView({ id }: { id: string }) {
               />
             }
           >
-            {t("settings.preferences.volumeBoostLabel") || "Volume Boost"}
+            Volume Boost
             <Menu.Link>
               {volumeBoostEnabled && (
                 <Slider
