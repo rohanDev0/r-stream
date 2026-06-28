@@ -14,7 +14,7 @@ import { usePreferencesStore } from "@/stores/preferences";
 import { useWatchPartyStore } from "@/stores/watchParty";
 import { isAutoplayAllowed } from "@/utils/autoplay";
 
-function Slider(props: {
+export function Slider(props: {
   label: string;
   value: number;
   min: number;
@@ -374,7 +374,7 @@ export function PlaybackSettingsView({ id }: { id: string }) {
               />
             }
           >
-            volumeBoost
+            {t("settings.preferences.volumeBoostLabel") || "Volume Boost"}
             <Menu.Link>
               {volumeBoostEnabled && (
                 <Slider
@@ -389,8 +389,12 @@ export function PlaybackSettingsView({ id }: { id: string }) {
                   onReset={() => setVolumeBoostLevel(100)}
                 />
               )}
+              <Menu.ChevronLink
+                onClick={() => router.navigate("/playback/advanced")}
+              >
+                Advanced Color Settings
+              </Menu.ChevronLink>
             </Menu.Link>
-            {t("settings.preferences.lowPerformanceModeLabel")}
           </Menu.Link>
           {!enableLowPerformanceMode && (
             <Menu.Link

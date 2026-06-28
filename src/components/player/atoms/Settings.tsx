@@ -15,6 +15,7 @@ import { useOverlayRouter } from "@/hooks/useOverlayRouter";
 import { CaptionListItem } from "@/stores/player/slices/source";
 import { usePlayerStore } from "@/stores/player/store";
 
+import { AdvancedColorView } from "./settings/AdvancedColorView";
 import { AudioView } from "./settings/AudioView";
 import { CaptionSettingsView } from "./settings/CaptionSettingsView";
 import { CaptionsView } from "./settings/CaptionsView";
@@ -140,6 +141,11 @@ function SettingsOverlay({ id }: { id: string }) {
         <OverlayPage id={id} path="/playback" width={343} height={330}>
           <Menu.Card>
             <PlaybackSettingsView id={id} />
+          </Menu.Card>
+        </OverlayPage>
+        <OverlayPage id={id} path="/playback/advanced" width={343} height={446}>
+          <Menu.Card>
+            <AdvancedColorView id={id} />
           </Menu.Card>
         </OverlayPage>
         <OverlayPage
