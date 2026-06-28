@@ -229,6 +229,12 @@ export function PlaybackSettingsView({ id }: { id: string }) {
   const display = usePlayerStore((s) => s.display);
   const enableThumbnails = usePreferencesStore((s) => s.enableThumbnails);
   const setEnableThumbnails = usePreferencesStore((s) => s.setEnableThumbnails);
+  const videoBrightness = usePreferencesStore((s) => s.videoBrightness);
+  const setVideoBrightness = usePreferencesStore((s) => s.setVideoBrightness);
+  const volumeBoostEnabled = usePreferencesStore((s) => s.enableHoldToBoost);
+  const volumeBoostLevel = usePreferencesStore((s) => s.volumeBoost);
+  const setVolumeBoostLevel = usePreferencesStore((s) => s.setVolumeBoost);
+
   const enableAutoplay = usePreferencesStore((s) => s.enableAutoplay);
   const setEnableAutoplay = usePreferencesStore((s) => s.setEnableAutoplay);
   const enableLowPerformanceMode = usePreferencesStore(
@@ -295,6 +301,12 @@ export function PlaybackSettingsView({ id }: { id: string }) {
     saveAutoplaySetting(newValue);
   }, [enableAutoplay, setEnableAutoplay, saveAutoplaySetting]);
 
+  // Handle volume boost toggle
+  const handleVolumeBoostToggle = useCallback(() => {
+    const newValue = volumeBoostLevel > 100 ? 100 : 200; // Toggle between 100% and 200%
+    setVolumeBoostLevel(newValue);
+  }, [volumeBoostLevel, setVolumeBoostLevel]);
+
   // Force 1x speed in watch party
   useEffect(() => {
     if (isInWatchParty && display && playbackRate !== 1) {
@@ -341,6 +353,45 @@ export function PlaybackSettingsView({ id }: { id: string }) {
               {t("settings.preferences.autoplayLabel")}
             </Menu.Link>
           )}
+          <Slider
+            label="Brightness"
+            value={videoBrightness}
+            min={10}
+            max={200}
+            step={5}
+            onChange={setVideoBrightness}
+            onReset={() => setVideoBrightness(100)}
+            defaultValue={100}
+            unit="%"
+          />
+          <Menu.Link
+            rightSide={
+              <Toggle
+                enabled={volumeBoostEnabled}
+                onClick={() => {
+                  handleVolumeBoostToggle();
+                }}
+              />
+            }
+          >
+            volumeBoost
+            <Menu.Link>
+              {volumeBoostEnabled && (
+                <Slider
+                  label="Boost Level"
+                  value={volumeBoostLevel}
+                  min={100}
+                  max={300}
+                  step={10}
+                  defaultValue={100}
+                  unit="%"
+                  onChange={setVolumeBoostLevel}
+                  onReset={() => setVolumeBoostLevel(100)}
+                />
+              )}
+            </Menu.Link>
+            {t("settings.preferences.lowPerformanceModeLabel")}
+          </Menu.Link>
           {!enableLowPerformanceMode && (
             <Menu.Link
               rightSide={

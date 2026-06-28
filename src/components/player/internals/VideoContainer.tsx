@@ -104,6 +104,7 @@ function VideoElement() {
 
     gainNode.gain.value = volumeBoost / 100;
   }, [volumeBoost, videoEl]);
+
   const trackObjectUrl = useObjectUrl(
     () => (srtData ? convertSubtitlesToObjectUrl(srtData) : null),
     [srtData],
@@ -146,6 +147,12 @@ function VideoElement() {
     <video
       id="video-element"
       className="absolute inset-0 w-full h-screen bg-black"
+      style={{
+        filter:
+          videoBrightness !== 100
+            ? `brightness(${videoBrightness}%)`
+            : undefined,
+      }}
       autoPlay
       playsInline
       ref={videoEl}
