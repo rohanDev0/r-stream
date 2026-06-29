@@ -379,39 +379,26 @@ export function PlaybackSettingsView({ id }: { id: string }) {
             }
           >
             Volume Boost
-            <Menu.Link>
-              {volumeBoostEnabled && (
-                <Slider
-                  label="Boost Level"
-                  value={volumeBoostLevel}
-                  min={100}
-                  max={300}
-                  step={10}
-                  defaultValue={100}
-                  unit="%"
-                  onChange={setVolumeBoostLevel}
-                  onReset={() => setVolumeBoostLevel(100)}
-                />
-              )}
-              <Menu.ChevronLink
-                onClick={() => router.navigate("/playback/advanced")}
-              >
-                Advanced Color Settings
-              </Menu.ChevronLink>
-            </Menu.Link>
           </Menu.Link>
-          {!enableLowPerformanceMode && (
-            <Menu.Link
-              rightSide={
-                <Toggle
-                  enabled={enableThumbnails}
-                  onClick={handleThumbnailToggle}
-                />
-              }
-            >
-              {t("settings.preferences.thumbnailLabel")}
-            </Menu.Link>
+          {volumeBoostEnabled && (
+            <Slider
+              label="Boost Level"
+              value={volumeBoostLevel}
+              min={100}
+              max={300}
+              step={10}
+              defaultValue={100}
+              unit="%"
+              onChange={setVolumeBoostLevel}
+              onReset={() => setVolumeBoostLevel(100)}
+            />
           )}
+
+          <Menu.ChevronLink
+            onClick={() => router.navigate("/playback/advanced")}
+          >
+            Advanced Color Settings
+          </Menu.ChevronLink>
         </div>
       </Menu.Section>
     </>
