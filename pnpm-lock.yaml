@@ -44,7 +44,7 @@ importers:
         version: 1.8.0
       '@p-stream/providers':
         specifier: github:rohanDev0/providers#production
-        version: https://codeload.github.com/rohanDev0/providers/tar.gz/d5b3483f1e8457e8d553f9885f0c4bd9e92cf9a6
+        version: https://codeload.github.com/rohanDev0/providers/tar.gz/0061b14b7938a9487e55264e12e325ebdf67753c
       '@plasmohq/messaging':
         specifier: ^0.6.2
         version: 0.6.2(react@18.3.1)
@@ -1691,8 +1691,8 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@p-stream/providers@https://codeload.github.com/rohanDev0/providers/tar.gz/d5b3483f1e8457e8d553f9885f0c4bd9e92cf9a6':
-    resolution: {tarball: https://codeload.github.com/rohanDev0/providers/tar.gz/d5b3483f1e8457e8d553f9885f0c4bd9e92cf9a6}
+  '@p-stream/providers@https://codeload.github.com/rohanDev0/providers/tar.gz/0061b14b7938a9487e55264e12e325ebdf67753c':
+    resolution: {tarball: https://codeload.github.com/rohanDev0/providers/tar.gz/0061b14b7938a9487e55264e12e325ebdf67753c}
     version: 3.2.0
 
   '@pkgjs/parseargs@0.11.0':
@@ -3434,8 +3434,8 @@ packages:
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
-  iso-639-1@3.1.5:
-    resolution: {integrity: sha512-gXkz5+KN7HrG0Q5UGqSMO2qB9AsbEeyLP54kF1YrMsIxmu+g4BdB7rflReZTSTZGpfj8wywu6pfPBCylPIzGQA==}
+  iso-639-1@3.1.6:
+    resolution: {integrity: sha512-ZFar/L4ngX7wZh2QX+Fiftmuf0igWJsrJtfizrovWifF1gAWkfmRa5Z1m0LQZbm0hKCHRDYhLRSLFrSqNe4EJA==}
     engines: {node: '>=6.0'}
 
   iso-639-3@3.0.1:
@@ -6748,7 +6748,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@p-stream/providers@https://codeload.github.com/rohanDev0/providers/tar.gz/d5b3483f1e8457e8d553f9885f0c4bd9e92cf9a6':
+  '@p-stream/providers@https://codeload.github.com/rohanDev0/providers/tar.gz/0061b14b7938a9487e55264e12e325ebdf67753c':
     dependencies:
       abort-controller: 3.0.0
       cheerio: 1.0.0-rc.12
@@ -6757,7 +6757,7 @@ snapshots:
       form-data: 4.0.4
       fuse.js: 7.1.0
       hls-parser: 0.13.6
-      iso-639-1: 3.1.5
+      iso-639-1: 3.1.6
       json5: 2.2.3
       nanoid: 3.3.11
       node-fetch: 3.3.2
@@ -8687,7 +8687,7 @@ snapshots:
 
   isexe@2.0.0: {}
 
-  iso-639-1@3.1.5: {}
+  iso-639-1@3.1.6: {}
 
   iso-639-3@3.0.1: {}
 
